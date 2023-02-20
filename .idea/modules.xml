@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/YouthCamp-Feedback/Feedback.iml" filepath="$PROJECT_DIR$/YouthCamp-Feedback/Feedback.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/YouthCamp-Feedback.iml" filepath="$PROJECT_DIR$/.idea/YouthCamp-Feedback.iml" />
+    </modules>
+  </component>
+</project>
