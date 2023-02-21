@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -30,26 +31,18 @@ public class User implements Serializable {
     private Integer phone;
 
 
-/*
+
     /////////chedya_Forum////
     //Relation ManyToMany user-Publication
-    @JsonIgnore
-    @ManyToMany(cascade =CascadeType.ALL)
-    private <Publicattion> publications;
-    //Relation OneToMany user-Reaction
-    @OneToMany(cascade = CascadeTpye.All)
-    Private Set <Reaction> reactions;
-
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Publication> publications;
     //Relation OneToMany user-Commentaire
-    @OneToMany(cascade = CascadeTpye.All)
-    Private Set <Commentaire> commentaires;
+    @OneToMany (cascade = CascadeType.ALL)
+    private Set<Commentaire> commentaires;
+    //Relation OneToMany Publication-Reaction
+    @OneToMany (cascade = CascadeType.ALL)
+    private Set<Reaction> reactions;
 
-    //Relation OneToMany user-Message
-    @OneToMany (cascade= CascadeType.All, mappedBy="user")
-    Private set <Message> messages;
-    //Relation OneToMany user-Reaction
-    @OneToMany(cascade = CascadeTpye.All)
-    Private Set <Reaction> reactions;
-*/
+
 }
 

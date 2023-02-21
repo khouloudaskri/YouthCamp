@@ -23,9 +23,17 @@ public class Publication implements Serializable {
     private Date pubDate;
     @Enumerated(EnumType.STRING)
     private TypePublication typePublication;
+
+    //Relation ManyToMany user-Publication
+    @ManyToMany(mappedBy = "publications", cascade = CascadeType.ALL)
+    private Set<User> users;
+    //Relation OneToMany Publication-Reaction
+    @OneToMany (cascade = CascadeType.ALL)
+    private Set<Reaction> reactions;
+    //Relation OneToMany Publication-Commentaire
+    @OneToMany (cascade = CascadeType.ALL)
+    private Set<Commentaire> commentaires;
 /*
-    //Relation ManyToMany
-    @ManyToMany (mappedBy = "Publication", cascade = CascadeType.ALL)
 
     //Relation
     @OneToMany(cascade = CascadeType.ALL)
