@@ -25,21 +25,16 @@ public class Publication implements Serializable {
     private TypePublication typePublication;
 
     //Relation ManyToMany user-Publication
+    @JsonIgnore
     @ManyToMany(mappedBy = "publications", cascade = CascadeType.ALL)
     private Set<User> users;
     //Relation OneToMany Publication-Reaction
+    @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Reaction> reactions;
     //Relation OneToMany Publication-Commentaire
+    @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Commentaire> commentaires;
-/*
 
-    //Relation
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
-    @ToString.Exclude
-    private Set<Publication> Publications;
-
- */
 }

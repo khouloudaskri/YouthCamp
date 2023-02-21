@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -24,12 +25,8 @@ public class Message implements Serializable {
     private Date msgdate;
     @Enumerated(EnumType.STRING)
     private TypeMessage typeMessage;
-    /*
-    //Relation ManyToOne Message-One
-    @JsonIgnore
-    @ManyToOne
-    Message message;
 
-     */
-
+    //Relation ManyToOne Message-user
+    @ManyToOne(cascade = CascadeType.ALL)
+    User user;
 }

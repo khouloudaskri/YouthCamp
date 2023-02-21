@@ -34,14 +34,21 @@ public class User implements Serializable {
 
     /////////chedya_Forum////
     //Relation ManyToMany user-Publication
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Publication> publications;
     //Relation OneToMany user-Commentaire
+    @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Commentaire> commentaires;
     //Relation OneToMany Publication-Reaction
+    @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Reaction> reactions;
+    //Relation OneToMany user-message
+    @JsonIgnore
+    @OneToMany (cascade = CascadeType.ALL)
+    private Set<Message> messages;
 
 
 }
