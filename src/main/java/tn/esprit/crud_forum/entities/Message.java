@@ -1,5 +1,6 @@
 package tn.esprit.crud_forum.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,5 +24,12 @@ public class Message implements Serializable {
     private Date msgdate;
     @Enumerated(EnumType.STRING)
     private TypeMessage typeMessage;
+    /*
+    //Relation ManyToOne Message-One
+    @JsonIgnore
+    @ManyToOne
+    Message message;
+
+     */
 
 }

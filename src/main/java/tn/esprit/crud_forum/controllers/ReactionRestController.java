@@ -2,7 +2,6 @@ package tn.esprit.crud_forum.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.crud_forum.entities.Publication;
 import tn.esprit.crud_forum.entities.Reaction;
 import tn.esprit.crud_forum.services.IReaction;
 
