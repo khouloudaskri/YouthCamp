@@ -16,8 +16,6 @@ import java.util.Set;
 public class ReactionServiceImpl implements IReaction {
     @Autowired
     ReactionRepository reactionRepository;
-    @Autowired
-    PublicationRepository publicationRepository;
 
     @Override
     public List<Reaction> retrieveAllReaction() {
@@ -49,15 +47,7 @@ public class ReactionServiceImpl implements IReaction {
         Reaction r=retrieveReaction(idReac);
         reactionRepository.delete(r);
     }
-    //Affectation Reac To Pub
-    public void affectationReactionToPublication(Integer idReac, Integer idPub){
-        Reaction r=reactionRepository.findById(idReac).orElse(null);
-        Publication p=publicationRepository.findById(idPub).orElse(null);
-      //r.getPublications().add(p);
-       reactionRepository.save(r);
 
-
-    }
 
 
 }

@@ -44,4 +44,11 @@ public class PublicationRestController {
         return publication;
     }
 
+    //Affectation pub->reaction
+    @PutMapping(value="/affecter-Publication-Reaction/{PubId}/{reactionId}")
+    public void affecterPublicationToReaction(@PathVariable("PubId") Integer idPub,
+                                           @PathVariable("reactionId")Integer idReac){
+        publicationService.AffecterPublicationToReaction(idPub,idReac );
+    }
+
 }

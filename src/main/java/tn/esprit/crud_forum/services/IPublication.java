@@ -14,5 +14,6 @@ public interface IPublication {
     public Publication retrievePublication (Integer idPub);
 
     public  void deletePublication(Integer idPub);
-
+    // Affectation Publication To Reaction
+    public void AffecterPublicationToReaction(Integer idReac, Integer idPub);
 }

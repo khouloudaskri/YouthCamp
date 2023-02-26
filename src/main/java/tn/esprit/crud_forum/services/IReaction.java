@@ -16,8 +16,7 @@ public interface IReaction {
     public Reaction retrieveReaction (Integer idReac);
 
     public  void deleteReaction(Integer idReac);
-    // Affectation Reaction To Publication
-    public void affectationReactionToPublication(Integer idReac, Integer idPub);
+
    // public Set<Publication> retrievePublicationByReaction(Integer idReac);
 
 }

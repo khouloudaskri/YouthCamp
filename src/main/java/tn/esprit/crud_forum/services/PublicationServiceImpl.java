@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.crud_forum.entities.Publication;
+import tn.esprit.crud_forum.entities.Reaction;
 import tn.esprit.crud_forum.repositories.PublicationRepository;
+import tn.esprit.crud_forum.repositories.ReactionRepository;
 
 import java.util.List;
 
@@ -13,6 +15,11 @@ import java.util.List;
 public class PublicationServiceImpl implements IPublication {
     @Autowired
     PublicationRepository publicationRepository;
+    @Autowired
+    ReactionRepository reactionRepository;
+
+
+
     @Override
    /*  List<Publication> retrieveAllPublication(){
         return publicationRepository.findAll();
@@ -38,4 +45,24 @@ public class PublicationServiceImpl implements IPublication {
         Publication p=retrievePublication(idPub);
         publicationRepository.delete(p);
     }
+
+    //Affectation PubToReaction
+  /*  @Override
+    public void affectationPublicationToReaction(Integer idReac, Integer idPub) {
+        Reaction r=reactionRepository.findById(idReac).orElse(null);
+        Publication p=publicationRepository.findById(idPub).orElse(null);
+        // r.getPublications().add(p);
+        reactionRepository.save(r);
+    }
+    }
+*/
+
+//Affectation PubToReaction
+    public void AffecterPublicationToReaction(Integer idReac, Integer idPub){
+        Publication p= publicationRepository.findById(idPub).orElse(null);
+        Reaction r= reactionRepository.findById(idReac).orElse(null);
+        p.getReactions().add(r);
+        publicationRepository.save(p);
+    }
+
 }
