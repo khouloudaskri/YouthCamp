@@ -41,10 +41,16 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Commentaire> commentaires;
-    //Relation OneToMany Publication-Reaction
+    //Relation OneToMany user-Reaction
     @JsonIgnore
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Reaction> reactions;
+    //Relation OneToMany user-MotIterdit-
+    @JsonIgnore
+    @OneToMany (cascade = CascadeType.ALL)
+    private Set<MotInterdit> motInterdits;
+
+
     //Relation OneToMany user-message
    /*  @JsonIgnore
    @OneToMany (cascade = CascadeType.ALL)
