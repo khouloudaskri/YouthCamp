@@ -31,6 +31,7 @@ public class PublicationServiceImpl implements IPublication {
     }
 
     public Publication retrievePublication (Integer idPub){
+
         return publicationRepository.findById(idPub).get();
     }
     public void deletePublication(Integer idPub){

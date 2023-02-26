@@ -1,9 +1,11 @@
 package tn.esprit.crud_forum.entities;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -17,6 +19,6 @@ public class Commentaire implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idCom;
     private String commentText;
-    @Temporal(TemporalType.DATE)
-    private Date commentDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate commentDate;
 }

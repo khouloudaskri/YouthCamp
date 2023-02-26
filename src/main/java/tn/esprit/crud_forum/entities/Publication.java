@@ -2,9 +2,11 @@ package tn.esprit.crud_forum.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,9 +21,11 @@ public class Publication implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idPub;
     private String content;
-    @Temporal(TemporalType.DATE)
-    private Date pubDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate pubDate;
+
     @Enumerated(EnumType.STRING)
+
     private TypePublication typePublication;
 
     //Relation ManyToMany user-Publication

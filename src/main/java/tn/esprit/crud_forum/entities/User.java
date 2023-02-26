@@ -46,10 +46,10 @@ public class User implements Serializable {
     @OneToMany (cascade = CascadeType.ALL)
     private Set<Reaction> reactions;
     //Relation OneToMany user-message
-    @JsonIgnore
-    @OneToMany (cascade = CascadeType.ALL)
+   /*  @JsonIgnore
+   @OneToMany (cascade = CascadeType.ALL)
     private Set<Message> messages;
-
+   */
 
 }
 
