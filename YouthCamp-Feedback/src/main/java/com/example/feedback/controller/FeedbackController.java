@@ -31,9 +31,15 @@ public class FeedbackController {
         Feedback feedback = feedbackService.updateFeedback(c);
         return feedback;
     }
-    @DeleteMapping("/remove-feedback/{feedback-id}")
-    public void removeFeedback(@PathVariable("feedback-id") Integer idFeedback) {
+    @DeleteMapping("/remove-feedback/{idFeedback}")
+    public void removeFeedback(@PathVariable("idFeedback") Integer idFeedback) {
 
         feedbackService.removeFeedback(idFeedback);
+    }
+    @PutMapping("/assign-Feedback/{idFeedback}/{IdUser}")
+    public void assignFeedbackToUser(@PathVariable("idFeedback") Integer idFeedback,
+                                     @PathVariable("IdUser") Integer IdUser) {
+        feedbackService.assignFeedbackToUser(idFeedback,IdUser);
+
     }
 }

@@ -9,6 +9,8 @@ public interface IFeedbackService {
     public Feedback updateFeedback(Feedback f);
     public List<Feedback> retrieveAllFeedbacks();
     public  void removeFeedback(Integer idFeedback);
+    public void assignFeedbackToUser(Integer idFeedback,Integer IdUser);
+
 
 
 }

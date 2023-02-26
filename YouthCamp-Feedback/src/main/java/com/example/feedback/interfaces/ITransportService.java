@@ -9,4 +9,12 @@ public interface ITransportService {
     public Transport updateTransport(Transport f);
     public List<Transport> retrieveAllTransports();
     public  void removeTransport(Integer idTransport);
-}
+    public void assignTransportToUser(Integer idTransport,Integer IdUser);
+    public double latitude(String city);
+    public double longitude(String city);
+
+
+
+
+
+    }

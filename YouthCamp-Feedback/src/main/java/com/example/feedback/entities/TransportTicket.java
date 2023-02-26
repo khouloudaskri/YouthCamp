@@ -5,28 +5,22 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-
 @Entity
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Feedback implements Serializable {
+public class TransportTicket implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idFeedback;
-    @Enumerated(EnumType.STRING)
-    private  Subject Sub;
-    private String Description;
-    // @Temporal(TemporalType.DATE)
-    private LocalDate dateFeedback;
+    private Integer Id;
+    private Integer Prix;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
-    @ManyToOne
-    User user;
-
-
-
+    User userTicket;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    Transport transport;
 
 }
