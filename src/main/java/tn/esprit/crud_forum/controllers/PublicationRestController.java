@@ -50,5 +50,11 @@ public class PublicationRestController {
                                            @PathVariable("reactionId")Integer idReac){
         publicationService.AffecterPublicationToReaction(idPub,idReac );
     }
+    //Affectation pub->Commentaire
+    @PutMapping(value="/affecter-Publication-Commentaire/{PubId}/{commentaireId}")
+    public void affecterPublicationToCommentaire(@PathVariable("PubId") Integer idPub,
+                                              @PathVariable("commentaireId")Integer idCom){
+        publicationService.AffecterPublicationToCommentaire(idPub,idCom);
+    }
 
 }

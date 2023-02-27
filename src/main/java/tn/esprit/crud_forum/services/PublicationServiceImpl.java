@@ -3,8 +3,10 @@ package tn.esprit.crud_forum.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.crud_forum.entities.Commentaire;
 import tn.esprit.crud_forum.entities.Publication;
 import tn.esprit.crud_forum.entities.Reaction;
+import tn.esprit.crud_forum.repositories.CommentaireRepository;
 import tn.esprit.crud_forum.repositories.PublicationRepository;
 import tn.esprit.crud_forum.repositories.ReactionRepository;
 
@@ -13,6 +15,8 @@ import java.util.List;
 @Slf4j
 @Service
 public class PublicationServiceImpl implements IPublication {
+    @Autowired
+    private CommentaireRepository commentaireRepository;
     @Autowired
     PublicationRepository publicationRepository;
     @Autowired
@@ -62,6 +66,13 @@ public class PublicationServiceImpl implements IPublication {
         Publication p= publicationRepository.findById(idPub).orElse(null);
         Reaction r= reactionRepository.findById(idReac).orElse(null);
         p.getReactions().add(r);
+        publicationRepository.save(p);
+    }
+    //Affectation PubToCommentaire
+    public void AffecterPublicationToCommentaire(Integer idCom, Integer idPub){
+        Commentaire c= commentaireRepository.findById(idCom).orElse(null);
+        Publication p= publicationRepository.findById(idPub).orElse(null);
+        p.getCommentaires().add(c);
         publicationRepository.save(p);
     }
 

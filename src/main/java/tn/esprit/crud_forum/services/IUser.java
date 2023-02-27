@@ -1,5 +1,6 @@
 package tn.esprit.crud_forum.services;
 
+import lombok.AllArgsConstructor;
 import tn.esprit.crud_forum.entities.Reaction;
 import tn.esprit.crud_forum.entities.User;
 
@@ -15,4 +16,6 @@ public interface IUser {
     public User retrieveUser (Integer iduser);
 
     public  void deleteUser(Integer iduser);
+    //Afferctation Pub to Commentaire
+    public void AffecterUserToReaction(Integer idReac, Integer iduser);
 }

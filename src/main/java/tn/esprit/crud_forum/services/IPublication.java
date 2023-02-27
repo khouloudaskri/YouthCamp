@@ -16,4 +16,6 @@ public interface IPublication {
     public  void deletePublication(Integer idPub);
     // Affectation Publication To Reaction
     public void AffecterPublicationToReaction(Integer idReac, Integer idPub);
+    //Afferctation Pub to Commentaire
+    public void AffecterPublicationToCommentaire(Integer idCom, Integer idPub);
 }
