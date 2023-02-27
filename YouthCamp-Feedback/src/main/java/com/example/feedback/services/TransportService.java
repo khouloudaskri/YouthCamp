@@ -7,6 +7,7 @@ import com.example.feedback.repositories.TransportRepository;
 import com.example.feedback.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.util.SloppyMath;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -63,7 +64,7 @@ public class TransportService implements ITransportService {
   }
 
 
-    public double latitude(String city) {
+   /* public double latitude(String city) {
         double lat=0;
 
         String[] Cities = new String[24];
@@ -193,6 +194,43 @@ public class TransportService implements ITransportService {
 
 
     }
+    public double calculateDistanceCity(String dep,String des) {
+        double lat1=latitude(dep);
+        log.info(String.valueOf(lat1));
+
+
+        double long1=longitude(dep);
+        log.info(String.valueOf(long1));
+
+        double lat2=latitude(des);
+        log.info(String.valueOf(lat2));
+
+        double long2=longitude(des);
+        log.info(String.valueOf(long2));
+
+
+
+
+        double dist = SloppyMath.haversinKilometers(lat1, long1, lat2, long2);
+        return dist;
+    }
+
+    public double calculatePrice(String dep,String des){
+       double p;
+        double lat1=latitude(dep);
+        double long1=longitude(dep);
+        double lat2=latitude(des);
+        double long2=longitude(des);
+        double dist = SloppyMath.haversinKilometers(lat1, long1, lat2, long2);
+        if(dist>10 && dist<150) {
+            p=dist*0.086;}
+        else if (dist>150) {
+            p=dist*0.071;
+        }
+else
+    p=0.850;
+        return p;
+    }*/
 
 
 }

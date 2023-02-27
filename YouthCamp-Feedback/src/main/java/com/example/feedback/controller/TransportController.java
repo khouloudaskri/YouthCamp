@@ -36,8 +36,12 @@ public class TransportController {
         return dist;
     }*/
 
-    @PostMapping("/calculateDistance")
-    public double calculateDistanceCity(String dep,String des) {
+  /*  @PostMapping("/calculateDistance")
+    public double calculateDistanceCity(String dep,String des){
+        double d=transportService.calculateDistanceCity(dep,des);
+        return d;
+    }
+   /* public double calculateDistanceCity(String dep,String des) {
         double lat1=transportService.latitude(dep);
 log.info(String.valueOf(lat1));
 
@@ -56,8 +60,12 @@ log.info(String.valueOf(lat1));
 
         double dist = SloppyMath.haversinKilometers(lat1, long1, lat2, long2);
         return dist;
-    }
-
+    }*/
+ /*  @PostMapping("/calculatePrice")
+   public double calculatePrice(String dep,String des){
+       double P=transportService.calculatePrice(dep,des);
+       return P;
+   }*/
 
   /*  @GetMapping("/Latitude")
     public double  maps() {

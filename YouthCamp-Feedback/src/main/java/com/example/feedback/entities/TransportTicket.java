@@ -14,9 +14,9 @@ import java.io.Serializable;
 public class TransportTicket implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer idTransportTicket;
     private Integer Prix;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
     User userTicket;
     @ManyToOne(cascade = CascadeType.ALL)
