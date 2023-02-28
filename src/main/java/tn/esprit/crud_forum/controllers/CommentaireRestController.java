@@ -1,9 +1,9 @@
 package tn.esprit.crud_forum.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.crud_forum.entities.Commentaire;
-import tn.esprit.crud_forum.entities.Publication;
 import tn.esprit.crud_forum.services.ICommentaire;
 
 import java.util.List;
@@ -12,7 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/Commentaire")
 public class CommentaireRestController {
+    @Autowired
     ICommentaire commentaireService;
+    @Autowired
+    DetectionMotsInterditsService detectionMotsInterditsService;
+
     //Afficher les Commentaires
     @GetMapping("/retrieve-all-Commentaires")
     public List<Commentaire> getCommentaire() {
@@ -27,7 +31,7 @@ public class CommentaireRestController {
 
     //Ajouter commentaire
     @PostMapping("/add-commentaire")
-    public Commentaire addPublication(@RequestBody Commentaire c) {
+    public Commentaire addCommentaire(@RequestBody Commentaire c) {
         Commentaire commentaire = commentaireService.addCommentaire(c);
         return commentaire;
     }
@@ -45,4 +49,18 @@ public class CommentaireRestController {
         return commentaire;
     }
 
+
+    /*
+    // detecter mot interdits
+    @PostMapping("/detecter-mots-interdits")
+    public ResponseEntity<List<String>> detecterMotsInterdits(@RequestBody String texte) {
+        List<String> interditsDetectes = detectionMotsInterditsService.detecterMotsInterdits(texte);
+
+        if (interditsDetectes.isEmpty()) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.badRequest().body(interditsDetectes);
+        }
+
+    */
 }

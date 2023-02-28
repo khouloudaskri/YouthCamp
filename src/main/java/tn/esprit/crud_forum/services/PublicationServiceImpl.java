@@ -4,9 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.crud_forum.entities.Commentaire;
+import tn.esprit.crud_forum.entities.MotInterdit;
 import tn.esprit.crud_forum.entities.Publication;
 import tn.esprit.crud_forum.entities.Reaction;
 import tn.esprit.crud_forum.repositories.CommentaireRepository;
+import tn.esprit.crud_forum.repositories.MotInterditRepository;
 import tn.esprit.crud_forum.repositories.PublicationRepository;
 import tn.esprit.crud_forum.repositories.ReactionRepository;
 
@@ -21,6 +23,9 @@ public class PublicationServiceImpl implements IPublication {
     PublicationRepository publicationRepository;
     @Autowired
     ReactionRepository reactionRepository;
+    @Autowired
+    MotInterditRepository motInterditRepository;
+
 
 
 
@@ -33,6 +38,12 @@ public class PublicationServiceImpl implements IPublication {
         return (List<Publication>)publicationRepository.findAll();
     }
     public Publication addPublication (Publication p){
+        ///// detecte les mots interdits en publication/////////
+        /*String d;
+        d=filter(p.getContent());
+        log.info(d);
+        p.setContent(d);*/
+        /////////////////////////////////////////
         return publicationRepository.save(p);
     }
 
@@ -75,5 +86,14 @@ public class PublicationServiceImpl implements IPublication {
         p.getCommentaires().add(c);
         publicationRepository.save(p);
     }
+ /// Mots Interdits
+/* public String filter (String input){
+    // List<MotInterdit> motsInterdits = motInterditRepository.findAll();
+     String filteredInput=input;
+     for (String badWords: MotInterdit){
+         filteredInput=filteredInput.replaceAll(badWords, "****" );
+     }return filteredInput;
+    }
 
-}
+ */
+ }

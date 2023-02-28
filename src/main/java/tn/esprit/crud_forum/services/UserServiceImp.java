@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.crud_forum.entities.Publication;
 import tn.esprit.crud_forum.entities.Reaction;
 import tn.esprit.crud_forum.entities.User;
+import tn.esprit.crud_forum.repositories.PublicationRepository;
 import tn.esprit.crud_forum.repositories.ReactionRepository;
 import tn.esprit.crud_forum.repositories.UserRepository;
 
@@ -15,7 +16,9 @@ import java.util.List;
 @Service
 @Slf4j
 public class UserServiceImp implements IUser {
-   @Autowired
+    @Autowired
+    private PublicationRepository publicationRepository;
+    @Autowired
     ReactionRepository reactionRepository;
     @Autowired
     UserRepository userRepository;
@@ -54,5 +57,12 @@ public class UserServiceImp implements IUser {
         userRepository.save(u);
     }
 
+    //Affectation UserToPublication
+    public void AffecterUserToPublication(Integer idPub, Integer iduser){
+        User u= userRepository.findById(iduser).orElse(null);
+        Publication p= publicationRepository.findById(idPub).orElse(null);
+        u.getPublications().add(p);
+        userRepository.save(u);
+    }
 
 }

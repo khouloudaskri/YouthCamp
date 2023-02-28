@@ -4,8 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.crud_forum.entities.Commentaire;
+import tn.esprit.crud_forum.entities.MotInterdit;
 import tn.esprit.crud_forum.entities.Publication;
 import tn.esprit.crud_forum.repositories.CommentaireRepository;
+import tn.esprit.crud_forum.repositories.MotInterditRepository;
 
 import java.util.List;
 
@@ -21,6 +23,12 @@ public class CommentaireServiceImpl implements ICommentaire {
     }
 
     public Commentaire addCommentaire(Commentaire c) {
+        ///// detecte les mots interdits en comment-text/////////
+        String d;
+        d=filter(c.getCommentText());
+        log.info(d);
+        c.setCommentText(d);
+        /////////////////////////////////////////
         return commentaireRepository.save(c);
     }
 
@@ -38,5 +46,14 @@ public class CommentaireServiceImpl implements ICommentaire {
         commentaireRepository.delete(c);
     }
 
+ //mot interdit
+   private static final String[]
+         BAD_WORDS={"khra","ham hetha","mandher","hama nkad"};
+    public String filter (String input){
+        String filteredInput=input;
+        for (String badWords: BAD_WORDS){
+            filteredInput=filteredInput.replaceAll(badWords, "****" );
+        }return filteredInput;
+    }
 
 }
