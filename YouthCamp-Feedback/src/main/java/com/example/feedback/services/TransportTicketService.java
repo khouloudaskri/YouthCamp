@@ -8,32 +8,93 @@ import com.example.feedback.interfaces.ITransportTicketService;
 import com.example.feedback.repositories.TransportRepository;
 import com.example.feedback.repositories.TransportTicketRepository;
 import com.example.feedback.repositories.UserRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.util.SloppyMath;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @AllArgsConstructor
 @Service
+@Slf4j
 public class TransportTicketService implements ITransportTicketService {
     TransportTicketRepository transportTicketRepository;
     UserRepository userRepository;
     TransportRepository transportRepository;
     @Override
     public TransportTicket addTransportTicket(TransportTicket f) {
-        return transportTicketRepository.save(f);    }
+
+        return transportTicketRepository.save(f);
+    }
+    @Override
+    public void AssignTransportTicketTotransport(Integer IdTicket,Integer idTransport) {
+        Transport U = transportRepository.findById(idTransport).orElse(null);
+        TransportTicket f=transportTicketRepository.findById(IdTicket).orElse(null);
+        if (U.getNombrePlaces() > 0) {
+
+            U.getDeparture();
+            U.getDestination();
+
+            double d= calculateDistanceCity(U.getDeparture(), U.getDestination());
+            f.setDistance(d);
+            double p = calculatePrice(U.getDeparture(), U.getDestination());
+            f.setPrix(p);
+            U.setNombrePlaces(U.getNombrePlaces() - 1);
+        }
+    }
+
+
+    @Override
+    public TransportTicket AddAndAssignTransportTicketTotransport(TransportTicket f,Integer idTransport) {
+        Transport U = transportRepository.findById(idTransport).orElse(null);
+        if (U.getNombrePlaces() > 0) {
+            f.setTransport(U);
+            U.getDeparture();
+            U.getDestination();
+
+            double d= calculateDistanceCity(U.getDeparture(), U.getDestination());
+            f.setDistance(d);
+            double p = calculatePrice(U.getDeparture(), U.getDestination());
+            f.setPrix(p);
+            U.setNombrePlaces(U.getNombrePlaces() - 1);
+            return transportTicketRepository.save(f);
+        }
+
+        return f;
+    }
+
 
     @Override
     public TransportTicket updateTransportTicket(TransportTicket f) {
         return transportTicketRepository.save(f);    }
+   /* @Override
+    public Map<TransportTicket, Transport> retrieveAllTransportTicketsTransport(){
+        Map<TransportTicket, Transport> ListTicketandtransport=new HashMap<>();
+        List<TransportTicket> tickets=transportTicketRepository.findAll();
+        for (TransportTicket t:tickets){
+            ListTicketandtransport.put(transportTicketRepository.getTic())
+        }
+        return ListTicketandtransport;    }*/
+
 
 
     @Override
     public List<TransportTicket> retrieveAllTransportTickets() {
         return transportTicketRepository.findAll();    }
 
-
+    public TransportTicket retreviveTranportTicket(Integer  IdTicket){
+        return transportTicketRepository.findById(IdTicket).get();
+    }
+    public TransportTicket retreviveTranportTicket2(Integer  IdTicket, HttpServletResponse response){
+        return transportTicketRepository.findById(IdTicket).get();
+    }
     @Override
     public void removeTransportTicket(Integer id) {
          transportTicketRepository.deleteById(id);
@@ -50,7 +111,7 @@ public class TransportTicketService implements ITransportTicketService {
     }
 
 
-    @Transactional
+   /* @Transactional
     public void assignTransportTicketToTransport(Integer Id,Integer idTransport)
     {
         TransportTicket T=transportTicketRepository.findById(Id).orElse(null);
@@ -58,7 +119,7 @@ public class TransportTicketService implements ITransportTicketService {
         T.setTransport(U);
         transportTicketRepository.save(T);
 
-    }
+    }*/
     public double latitude(String city) {
         double lat=0;
         String[] Cities = new String[24];

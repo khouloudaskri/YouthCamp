@@ -30,21 +30,30 @@ d=filter(f.getDescription());
 f.setDescription(d);
         Map<String, Integer> wordCounts =countWords(f.getDescription(), words);
 int x=countWords2(f.getDescription(), words);
+        f.setNbrw(x);
 log.info(wordCounts.toString());
 log.info(String.valueOf(x));
-
         return feedbackRepository.save(f);
     }
 
 
     public Feedback updateFeedback(Feedback f) {
+        String d;
+
+        d=filter(f.getDescription());
+        f.setDescription(d);
+        Map<String, Integer> wordCounts =countWords(f.getDescription(), words);
+        int x=countWords2(f.getDescription(), words);
+        f.setNbrw(x);
+        log.info(wordCounts.toString());
+        log.info(String.valueOf(x));
         return feedbackRepository.save(f);
     }
 
 
     public List<Feedback> retrieveAllFeedbacks() {
 
-        return feedbackRepository.findAll();
+        return feedbackRepository.affichepriorty();
     }
 
 
@@ -62,13 +71,36 @@ log.info(String.valueOf(x));
     }
 
 
-        private static final String[] BAD_WORDS = {"khra", "ham", "kalb"};
+        private static final String[] BAD_WORDS = {"bad", "bad", "bad"};
 
         public String filter (String input){
             String filteredInput = input;
-            for (String badWord : BAD_WORDS) {
-                filteredInput = filteredInput.replaceAll(badWord, "****");
+            /*int NbrWords=  input.split("\\s+").length;
+            for (String name : BAD_WORDS) {
+                if (!input.contains(name)) {
+                   // return false;
+
+                    log.info("Fama Kelma");
+                }
+            }*/
+          int a=input.length();
+            String starStringmemetaille = "";
+            for (int i = 0; i < a; i++) {
+                starStringmemetaille += "*";
             }
+
+            String starStringdifftaille = "";
+            for (int i = 1; i < a; i++) {
+                starStringdifftaille += "*";
+            }
+            for (String badWord : BAD_WORDS) {
+                if(badWord.length()==input.length())
+                filteredInput = filteredInput.replaceAll(badWord, starStringmemetaille);
+                if(badWord.length()!=input.length())
+                    filteredInput = filteredInput.replaceAll(badWord, starStringdifftaille);
+
+            }
+
             return filteredInput;
         }
 
@@ -81,15 +113,31 @@ log.info(String.valueOf(x));
         }
         return wordCounts;
     }
-    public  int countWords2(String text, String[] words) {
-
-        int count = 0;
+    /*public  int countWords2(String text, String[] words) {
+       int x = 0;
         for (String word : words) {
-            count = countOccurrences(text, word);
-        count++;
+            x = countOccurrences(text, word);
+
+          //  log.info(String.valueOf(x));
         }
-        return count;
+          log.info(String.valueOf(x));
+
+        return x;
+
+    }*/
+    public Integer countWords2(String text, String[] words) {
+        Map<String, Integer> wordCounts = new HashMap<>();
+        for (String word : words) {
+            int count = countOccurrences(text, word);
+            wordCounts.put(word, count);
+        }
+        int sum = 0;
+        for (int value : wordCounts.values()) {
+            sum += value;
+        }
+        return sum;
     }
+
 
     public  int countOccurrences(String text, String word) {
             int count = 0;
@@ -98,7 +146,9 @@ log.info(String.valueOf(x));
                 count++;
                 index += word.length();
             }
-            return count;}
+
+        return count;
+    }
     }
    /* public void badwords(String text) {
         String[] badwords = new String[2];

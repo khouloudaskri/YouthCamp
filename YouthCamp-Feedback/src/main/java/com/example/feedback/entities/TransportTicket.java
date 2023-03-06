@@ -1,6 +1,8 @@
 package com.example.feedback.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,16 +13,24 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
+
 public class TransportTicket implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+       @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer idTransportTicket;
-    private Integer Prix;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private double distance;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private double prix;
+    @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Transport transport;
     @ManyToOne
     @JsonIgnore
     User userTicket;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
-    Transport transport;
+
+
 
 }

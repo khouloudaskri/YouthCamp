@@ -1,6 +1,7 @@
 package com.example.feedback.controller;
 
 import com.example.feedback.entities.Transport;
+import com.example.feedback.entities.TransportTicket;
 import com.example.feedback.interfaces.ITransportService;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
@@ -74,16 +75,11 @@ log.info(String.valueOf(lat1));
         return lat;
     }*/
 
-    @GetMapping("/retrieve-all-transports")
-    public List<Transport> getTransports() {
-        List<Transport> listTransports = transportService.retrieveAllTransports();
-        return listTransports;
-    }
 
     @PutMapping("/update-transport")
-    public Transport updateTransport(@RequestBody Transport c) {
-        Transport transport = transportService.updateTransport(c);
-        return transport;
+    public Transport updateTransport(@RequestBody Transport F) {
+        Transport x= transportService.updateTransport(F);
+        return x;
     }
     @DeleteMapping("/remove-transport/{transport-id}")
     public void removeTransport(@PathVariable("transport-id") Integer idTransport) {
@@ -96,4 +92,12 @@ log.info(String.valueOf(lat1));
          transportService.assignTransportToUser(idTransport,IdUser);
 
     }
+    @GetMapping("/retrieve-all-transport")
+    public List<Transport> getTransports() {
+
+        List<Transport> listTransports = transportService.findtransports();
+        log.info(listTransports.toString());
+        return listTransports;
+    }
+
 }

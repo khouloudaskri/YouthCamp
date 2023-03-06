@@ -1,6 +1,7 @@
 package com.example.feedback.services;
 
 import com.example.feedback.entities.Transport;
+import com.example.feedback.entities.TransportTicket;
 import com.example.feedback.entities.User;
 import com.example.feedback.interfaces.ITransportService;
 import com.example.feedback.repositories.TransportRepository;
@@ -8,6 +9,7 @@ import com.example.feedback.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.lucene.util.SloppyMath;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class TransportService implements ITransportService {
+    @Autowired
     TransportRepository transportRepository;
     UserRepository userRepository;
 
@@ -30,10 +33,11 @@ public class TransportService implements ITransportService {
     }
 
 
-    public List<Transport> retrieveAllTransports() {
+
+    public List<Transport> findtransports() {
+
         return transportRepository.findAll();
     }
-
     public void removeTransport(Integer idTransport) {
         transportRepository.deleteById(idTransport);
 
@@ -56,6 +60,7 @@ public class TransportService implements ITransportService {
   public void assignTransportToUser(Integer idTransport,Integer IdUser){
       User U = userRepository.findById(IdUser).orElse(null);
       Transport T = transportRepository.findById(idTransport).orElse(null);
+      log.info(T.toString());
       T.setUser(U);
       transportRepository.save(T);
 

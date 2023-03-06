@@ -14,7 +14,7 @@ public interface IFeedbackService {
     public String filter (String input);
     public  int countOccurrences(String text, String word);
     public  Map<String, Integer> countWords(String text, String[] words);
-    public  int countWords2(String text, String[] words) ;
+    public  Integer countWords2(String text, String[] words);
 
 
 

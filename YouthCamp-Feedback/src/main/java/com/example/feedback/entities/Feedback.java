@@ -25,7 +25,9 @@ public class Feedback implements Serializable {
     @JsonIgnore
     @ManyToOne
     User user;
+    @JsonIgnore
 
+    private Integer nbrw;
 
 
 
